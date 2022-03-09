@@ -1,4 +1,3 @@
-<code class="language-git" lang="git">$ git checkout -b test</code>
 open_file = open('point.txt') #open()関数でpoint.txt開く
 data = open_file.read() #read()メソッドでデータを読み込む
 open_file.close() #close()メソッドでファイル閉じる
@@ -16,3 +15,28 @@ for student_name in point_dict: #点数データを繰り返し
     point_list = point_dict[student_name].splist(',') #点数リストを作成
     subject_number = len(point_list) #点数を計算(len()関数＝リストに入っている値の個数や)
     total = 0
+
+# 点数リスト(point_list)から教科数(subject_number)、合計点(total)と平均点(average)を算出する
+    for point in point_list:
+        total = total + int(point) #int()関数 = 整数に直す
+    average = total / subject_number
+    score_dict[student_name] = (total, average, subject_number) #計算したものを辞書(score_dict)にデータを保存
+
+
+# 合計点を元に条件分岐で評価結果となる文字列を取得
+evaluation_dict = {} #評価を保存するための空の辞書を作成
+for student_name in score_dict:
+    score_data = score_dict[student_name]
+    total = score_data[0]
+    average = score_data[1]
+    subject_number = score_data[2]
+
+    excellent = subject_number * 100 * 0.8
+    good = subject_number * 100 * 0.65
+    if total >= excellent:
+        evaluation = 'Excellent!!!'
+    elif total >= good:
+        evaluation = 'Good!'
+    else:
+        evaluation = 'Bad'
+    evaluation_dict[student_name] = evaluation #評価結果を辞書に追加
