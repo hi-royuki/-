@@ -40,3 +40,20 @@ for student_name in score_dict:
     else:
         evaluation = 'Bad'
     evaluation_dict[student_name] = evaluation #評価結果を辞書に追加
+
+# 結果をファイルに出力する
+# ↓ファイルを開く（書き込み可）
+file_name = 'evaluation.txt'
+output_file = open(file_name, 'w')
+# ↑ここまで
+for student_name in score_dict: # 合計点や平均点を記録した辞書(score_dict)に対して繰り返し処理を行う。
+    score_data = score_dict[student_name]
+    total = score_data[0]
+
+    evaluation = evaluation_dict[student_name] # 評価(evaluation_dict)から取り出す
+
+    text = f'[{student_name}] total:{total},evaluation:{evaluation}\n'
+    output_file.write(text)
+output_file.close()
+
+print(f'評価結果を{file_name}に出力しました。')
